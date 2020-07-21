@@ -30,6 +30,19 @@ namespace TestMirrorFromTemplate
             DependencyProperty.Register("IsMirror", typeof(bool), typeof(MainWindow), new PropertyMetadata(false));
 
 
+
+        public string Messaggio
+        {
+            get { return (string)GetValue(MessaggioProperty); }
+            set { SetValue(MessaggioProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Messaggio.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MessaggioProperty =
+            DependencyProperty.Register("Messaggio", typeof(string), typeof(MainWindow), new PropertyMetadata("Messaggio"));
+
+
+
         public MainWindow()
         {
             InitializeComponent();

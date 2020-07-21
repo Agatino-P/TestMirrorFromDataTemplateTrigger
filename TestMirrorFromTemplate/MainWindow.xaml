@@ -4,33 +4,69 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TestMirrorFromTemplate"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        x:Name="MainW" Title="MainWindow" Width="800"
-        Height="450"
+        x:Name="MainW" Title="MainWindow" Width="800" Height="450"
         mc:Ignorable="d">
     <Window.Resources>
-        <DataTemplate x:Key="MyTemplate">
-            <TextBlock Width="100" Text="123456789">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Style.Triggers>
-
-                            <DataTrigger Binding="{Binding ElementName=MainW, Path=Mirror}" Value="1">
-                                <Setter Property="LayoutTransform">
-                                    <Setter.Value>
-                                        <ScaleTransform CenterX="0.5" ScaleX="-1" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
+        <DataTemplate x:Key="TextBoxContentTemplate">
+            <Border Padding="5" Background="Beige">
+                <TextBlock Width="100" Text="{Binding ElementName=MainW, Path=Messaggio}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=MainW, Path=Mirror}" Value="1">
+                                    <Setter Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform CenterX="0.5" ScaleX="-1" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="CustomControlContentTemplate">
+            <Border Padding="5" Background="Pink">
+                <local:TestUserControl Testo="{Binding ElementName=MainW, Path=Messaggio}">
+                    <local:TestUserControl.Style>
+                        <Style TargetType="{x:Type local:TestUserControl}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=MainW, Path=Mirror}" Value="1">
+                                    <Setter Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform CenterX="0.5" ScaleX="-1" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </local:TestUserControl.Style>
+                </local:TestUserControl>
+            </Border>
         </DataTemplate>
     </Window.Resources>
     <StackPanel>
-        <!--<TextBox x:Name="tb" Text="0" />-->
-        <TextBox Text="{Binding ElementName=MainW, Path=Mirror}" />
-
-        <ContentControl ContentTemplate="{StaticResource MyTemplate}" />
+        <GroupBox BorderBrush="Green" BorderThickness="2" Header="Input">
+            <DockPanel>
+                <HeaderedContentControl Margin="10" Header="Type what you want to show on Customcontrol">
+                    <TextBox Text="{Binding Messaggio, ElementName=MainW}" />
+                </HeaderedContentControl>
+                <HeaderedContentControl Margin="10" Header="1 for Mirror, 0 for no Mirror">
+                    <TextBox Text="{Binding ElementName=MainW, Path=Mirror}" />
+                </HeaderedContentControl>
+            </DockPanel>
+        </GroupBox>
+        <GroupBox BorderBrush="Red" BorderThickness="2"
+                  Header="Output inside 2 CustomControls">
+            <UniformGrid>
+                <HeaderedContentControl Margin="10" Header="Custom Control">
+                    <ContentControl ContentTemplate="{StaticResource TextBoxContentTemplate}" />
+                </HeaderedContentControl>
+                <HeaderedContentControl Margin="10" Header="TexBox">
+                    <ContentControl ContentTemplate="{StaticResource CustomControlContentTemplate}" />
+                </HeaderedContentControl>
+            </UniformGrid>
+        </GroupBox>
     </StackPanel>
 </Window>
