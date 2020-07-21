@@ -9,7 +9,8 @@
     <Window.Resources>
         <DataTemplate x:Key="TextBoxContentTemplate">
             <Border Padding="5" Background="Beige">
-                <TextBlock Width="100" Text="{Binding ElementName=MainW, Path=Messaggio}">
+                <TextBlock Width="100" Background="LightBlue"
+                           Text="{Binding ElementName=MainW, Path=Messaggio}">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
@@ -52,13 +53,13 @@
                 <HeaderedContentControl Margin="10" Header="Type what you want to show on Customcontrol">
                     <TextBox Text="{Binding Messaggio, ElementName=MainW}" />
                 </HeaderedContentControl>
-                <HeaderedContentControl Margin="10" Header="1 for Mirror, 0 for no Mirror">
-                    <TextBox Text="{Binding ElementName=MainW, Path=Mirror}" />
+                <HeaderedContentControl Margin="10" Header="Type 1 for Mirror, Anything else for no Mirror">
+                    <TextBox Text="{Binding ElementName=MainW, Path=Mirror, UpdateSourceTrigger=PropertyChanged}" />
                 </HeaderedContentControl>
             </DockPanel>
         </GroupBox>
         <GroupBox BorderBrush="Red" BorderThickness="2"
-                  Header="Output inside 2 CustomControls">
+                  Header="Output inside two ContentControls">
             <UniformGrid>
                 <HeaderedContentControl Margin="10" Header="Custom Control">
                     <ContentControl ContentTemplate="{StaticResource TextBoxContentTemplate}" />

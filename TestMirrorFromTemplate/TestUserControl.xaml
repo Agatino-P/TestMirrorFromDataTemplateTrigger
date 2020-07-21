@@ -6,8 +6,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Name="TUC" d:DesignHeight="450" d:DesignWidth="800"
              mc:Ignorable="d">
-    <StackPanel Orientation="Horizontal">
-        <Ellipse Width="20" Height="20" Fill="DarkOrange" />
-        <Button Content="{Binding ElementName=TUC, Path=Testo}" />
-    </StackPanel>
+    <Border BorderBrush="Black" BorderThickness="1">
+        <StackPanel Orientation="Horizontal">
+            <Ellipse Width="20" Height="20" Fill="DarkOrange" />
+            <Button Content="{Binding ElementName=TUC, Path=Testo}" />
+        </StackPanel>
+    </Border>
 </UserControl>
